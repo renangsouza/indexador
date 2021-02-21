@@ -2,8 +2,8 @@
 
 import sys
 
-# Menu de ajuda.
 def ajuda():
+    "Menu de ajuda."
     print("Sintaxe: ./indexador.py <arquivo>")
     sys.exit(1)
 
@@ -12,11 +12,15 @@ indice = "# Índice\n"
 topicos = []
 saida = ""
 
-# Funções
-def deleta():
-    return True
+def deleta(linhas):
+    "Remove índice pré-existente."
+    linhas.pop(0)
+    while linha in linhas:
+        if linha[0] == '#': break
+        else: linhas.pop(0)
 
 def aprofunda(linha):
+    "Monta lista de tópicos e suas respectivas profundidades."
     n = 0 # Nível do tópico (H1, H2, H3...).
     for c in linha:
         if c == ' ':
@@ -58,7 +62,8 @@ else:
     linhas = arquivo.readlines()
     for linha in linhas:
         if linha == "# Índice\n":
-            deleta() # Deleta um índice já existente.
+            deleta(linhas) # Deleta um índice já existente.
+            break
         elif linha[0] == '#':
             aprofunda(linha)
 

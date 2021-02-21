@@ -2,7 +2,7 @@
 
 Gera um índice para arquivos *markdown*. Exemplo:
 
-Arquivo Orginal | Arquivo Gerado
+arquivo.md | arquivo-indexado.md
 --- | ---
 ![alt text](/doc/img/antes.png?raw=true "Antes") | ![alt text](/doc/img/depois.png?raw=true "Depois")
 
