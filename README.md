@@ -14,4 +14,4 @@ indexador.py <arquivo_original.md>
 
 * Estilos
 * Controle de profundidade dos índices
-* Substituir arquivo original
+* Controle sobre a saída (substituir arquivo original, nome...)
