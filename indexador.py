@@ -19,6 +19,15 @@ def deleta(linhas):
         if linha[0] == '#': break
         else: linhas.pop(0)
 
+def ajeita(linha):
+    "Substitui espaço em branco por &nbsp;"
+    lAjeitada = []
+    for c in linha:
+        if c == ' ': lAjeitada.append("&nbsp;")
+        else: lAjeitada.append(c)
+
+    return "".join(lAjeitada)
+
 def aprofunda(linha):
     "Monta lista de tópicos e suas respectivas profundidades."
     n = 0 # Nível do tópico (H1, H2, H3...).
@@ -27,19 +36,19 @@ def aprofunda(linha):
             break
         else:
             n = n + 1
-                  
-    par = (n, linha[(n + 1):].rstrip()) # .rstrip() arranca nova linha ou espaços em branco no final.
+
+    par = (n, linha[(n + 1):].rstrip())
     topicos.append(par)
 
 
 def montaIndice(indice):
     for topico in topicos:
         if topico[0] == 1:
-            indice = indice + "* [" + topico[1] + "]" + "(#" + topico[1] + ")\n"
+            indice = indice + "* [" + topico[1] + "]" + "(#" + ajeita(topico[1]) + ")\n"
         elif topico[0] % 2 != 0:
-            indice = indice + (' ' * (topico[0] + 1)) + "* [" + topico[1] + "]" + "(#" + topico[1] + ")\n" 
+            indice = indice + (' ' * (topico[0] + 1)) + "* [" + topico[1] + "]" + "(#" + ajeita(topico[1]) + ")\n" 
         else:
-            indice = indice + (' ' * topico[0]) + "* [" + topico[1] + "]" + "(#" + topico[1] + ")\n"
+            indice = indice + (' ' * topico[0]) + "* [" + topico[1] + "]" + "(#" + ajeita(topico[1]) + ")\n"
 
     indice = indice + "\n"
     return indice
@@ -62,7 +71,7 @@ else:
     linhas = arquivo.readlines()
     for linha in linhas:
         if linha == "# Índice\n":
-            deleta(linhas) # Deleta um índice já existente.
+            deleta(linhas)
             break
         elif linha[0] == '#':
             aprofunda(linha)
